@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import  {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useOutletContext } from "react-router-dom";
 
 export default function AddHabit() {
@@ -99,44 +99,43 @@ export default function AddHabit() {
   const monthName = monthNames[selectedMonth - 1];
 
   // Handle habit addition animation and navigation
-const handleAddHabit = () => {
-  if (!habitName.trim()) {
-    toast.error("Please enter a habit name!");
-    return;
-  }
+  const handleAddHabit = () => {
+    if (!habitName.trim()) {
+      toast.error("Please enter a habit name!");
+      return;
+    }
 
-  const newHabit = {
-    id: Date.now(), // unique id
-    title: habitName,
-    highestStreak: 0,
-    currentStreak: 0,
-    
-    freq: {
-      mode: frequency,
-      days: selectedDays,
-      n: selectedDays.length,
-      startDate,
-    },
-    progress: [],
-    
-    lastCompleted: null,
+    const newHabit = {
+      id: Date.now(), // unique id
+      title: habitName,
+      highestStreak: 0,
+      currentStreak: 0,
+      
+      freq: {
+        mode: frequency,
+        days: selectedDays,
+        n: selectedDays.length,
+        startDate,
+      },
+      progress: [],
+      
+      lastCompleted: null,
+    };
+
+    // assuming you're passing setHabits as a prop
+    setHabits((prev) => [...prev, newHabit]);
+
+    toast.success("Habit saved successfully!", {
+      position: "top-right",
+      autoClose: 2000,
+    });
+
+    setIsHabitAdded(true);
+    setTimeout(() => {
+      setIsHabitAdded(false);
+      navigate("/");
+    }, 1000);
   };
-
-  // assuming you're passing setHabits as a prop
-  setHabits((prev) => [...prev, newHabit]);
-
-  toast.success("Habit saved successfully!", {
-    position: "top-right",
-    autoClose: 2000,
-  });
-
-  setIsHabitAdded(true);
-  setTimeout(() => {
-    setIsHabitAdded(false);
-    navigate("/");
-  }, 1000);
-};
-
 
   // Handle day selection for Weekly and Custom frequency
   const handleDayToggle = (day) => {
@@ -250,4 +249,3 @@ const handleAddHabit = () => {
     </div>
   );
 }
-

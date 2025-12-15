@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Dashboard from './pages/Dashboard'
+import React from 'react';
+import './App.css';
 
 function App() {
-  return (
-    <>
-      <Dashboard />
-    </>
-  )
+  return null;
 }
 
-export default App
+export default App;
